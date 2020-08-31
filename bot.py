@@ -27,7 +27,7 @@ def report(text):
         rep = {}
         file = open(filename, 'w')
         lst = []
-        w = str(water) + ' litres'
+        w = str(water) + ' л.'
         lst = [w, desc]
         rep[day] = lst
         file.close()
@@ -55,7 +55,7 @@ def out():
 def handle_start(message):
         user_markup = telebot.types.ReplyKeyboardMarkup(True, True)
         user_markup.row("/start", "/show")
-        bot.send_message(message.from_user.id, "Давай начнём.\nПришли данные в формате: день,вода,описание.", reply_markup=user_markup)
+        bot.send_message(message.from_user.id, "Пришли данные в формате: день,вода,описание.", reply_markup=user_markup)
         
         
 @bot.message_handler(content_types=['text'])
@@ -67,7 +67,7 @@ def handle_text(message):
             for i in range(100):
                 for k, v in rep.items():
                     if i == int(k):
-                        bot.send_message(message.chat.id, "day " + str(i) + ": " + rep.get(str(k))[0] + ", " + rep.get(str(k))[1])
+                        bot.send_message(message.chat.id, "день " + str(i) + ": " + rep.get(str(k))[0] + ", " + rep.get(str(k))[1])
                         
         except FileNotFoundError:
             bot.send_message(message.chat.id, "Записи отсутствуют.")
