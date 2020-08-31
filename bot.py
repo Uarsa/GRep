@@ -61,9 +61,14 @@ def handle_start(message):
 @bot.message_handler(content_types=['text'])
 def handle_text(message):
     if message.text == "/show":
-        for i in range(3):
-            bot.send_message(message.chat.id, str(i))
         
+        rep = json.load(open(filename))
+        for i in range(100):
+            for k, v in rep.items():
+                if i == int(k):
+                    bot.send_message(message.chat.id, "day " + str(i) + ": ")
+                    bot.send_message(message.chat.id, rep.get(str(k)))
+                    
     else:    
         try:
             
