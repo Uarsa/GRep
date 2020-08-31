@@ -60,7 +60,7 @@ def handle_start(message):
 @bot.message_handler(content_types=['text'])
 def handle_text(message):
         try:
-                go(message.text)
+                report(str(message.text))
                 
                 bot.send_message(message.chat.id, "Данные добавлены.")   
             
