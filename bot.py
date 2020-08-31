@@ -61,7 +61,8 @@ def handle_start(message):
 @bot.message_handler(content_types=['text'])
 def handle_text(message):
     if message.text == "/show":
-        bot.send_message(message.chat.id, "Выпадающий список...")
+        for i in range(3):
+            bot.send_message(message.chat.id, str(i))
         
     else:    
         try:
