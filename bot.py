@@ -18,7 +18,7 @@ def report(text):
         file = open(filename) 
         rep = json.load(file)
         lst = []
-        w = "полив: " + str(water) + ' л.'
+        w = str(water)
         lst = [w, desc]
         rep[day] = lst
         file.close()
@@ -64,7 +64,7 @@ def handle_text(message):
             for i in range(100):
                 for k, v in rep.items():
                     if i == int(k):
-                        bot.send_message(message.chat.id, "ДЕНЬ " + str(i) + ":\n" + rep.get(str(k))[0] + "\n" + rep.get(str(k))[1])
+                        bot.send_message(message.chat.id, "ДЕНЬ " + str(i) + ":\n" + "полив: " + rep.get(str(k))[0] + " л.\n" + rep.get(str(k))[1])
                         
         except FileNotFoundError:
             bot.send_message(message.chat.id, "Записи отсутствуют.")
