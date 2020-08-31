@@ -1,4 +1,6 @@
 import telebot
+from telebot import apihelper
+from telebot.types import Message
 import json
 
 
@@ -35,10 +37,6 @@ def report(text):
     filea.close()
     
     
-def go(text):
-    s = str(text) + " lol"
-    
-    
 def out():
     
     rep = json.load(open(filename))
@@ -48,24 +46,31 @@ def out():
             if i == int(k):
                 print("day " + str(i) + ": ")
                 print(rep.get(str(k)))
+           
+        
+             
 
 
 @bot.message_handler(commands=['start'])
 def handle_start(message):
         user_markup = telebot.types.ReplyKeyboardMarkup(True, True)
-        user_markup.row('/start')
-        bot.send_message(message.from_user.id, "Давай начнём.\nПришли данные в формате: день, вода, описание.", reply_markup=user_markup)
+        user_markup.row("/start", "/show")
+        bot.send_message(message.from_user.id, "Давай начнём.\nПришли данные в формате: день,вода,описание.", reply_markup=user_markup)
         
         
 @bot.message_handler(content_types=['text'])
 def handle_text(message):
+    if message.text == "/show":
+        bot.send_mesaage(message.chat.id, "Выпадающий список...")
+        
+    else:    
         try:
-                report(str(message.text))
-                
-                bot.send_message(message.chat.id, "Данные добавлены.")   
+            
+            report(str(message.text))
+            bot.send_message(message.chat.id, "Данные добавлены.")   
             
         except:
-                bot.send_message(message.chat.id, "Ошибка...")
+            bot.send_message(message.chat.id, "Ошибка...")
              
         
 bot.polling(none_stop=True, interval=0)    
