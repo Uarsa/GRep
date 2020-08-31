@@ -66,8 +66,8 @@ def handle_text(message):
         for i in range(100):
             for k, v in rep.items():
                 if i == int(k):
-                    bot.send_message(message.chat.id, "day " + str(i) + ": ")
-                    bot.send_message(message.chat.id, rep.get(str(k)))
+                    bot.send_message(message.chat.id, "day " + str(i) + ": " + rep.get(str(k))[0] + ", " + rep.get(str(k))[1])
+                    
                     
     else:    
         try:
