@@ -62,13 +62,18 @@ def handle_start(message):
 def handle_text(message):
     if message.text == "/show":
         
-        rep = json.load(open(filename))
-        for i in range(100):
-            for k, v in rep.items():
-                if i == int(k):
-                    bot.send_message(message.chat.id, "day " + str(i) + ": " + rep.get(str(k))[0] + ", " + rep.get(str(k))[1])
-                    
-                    
+        try:
+            rep = json.load(open(filename))
+            for i in range(100):
+                for k, v in rep.items():
+                    if i == int(k):
+                        bot.send_message(message.chat.id, "day " + str(i) + ": " + rep.get(str(k))[0] + ", " + rep.get(str(k))[1])
+                        
+        except FileNotFoundError:
+            bot.send_message(message.chat.id, "Записи отсутствуют.")
+            
+
+
     else:    
         try:
             
