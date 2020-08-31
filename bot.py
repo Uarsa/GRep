@@ -8,7 +8,7 @@ filename = "nums.json"
 
 def report(text):
     
-    s = text.split(",")
+    s = text.split(", ")
     day = s[0]
     water = s[1]
     desc = s[2]
@@ -40,7 +40,7 @@ def report(text):
 def handle_start(message):
         user_markup = telebot.types.ReplyKeyboardMarkup(True, True)
         user_markup.row("/start", "/show")
-        bot.send_message(message.from_user.id, "Пришли данные в формате: день,вода,описание.", reply_markup=user_markup)
+        bot.send_message(message.from_user.id, "Пришли данные в формате: день, вода, описание.", reply_markup=user_markup)
         
         
 @bot.message_handler(content_types=['text'])
