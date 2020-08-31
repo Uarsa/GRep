@@ -1,11 +1,10 @@
 import telebot
-from telebot import apihelper
-from telebot.types import Message
 import json
 
 
 bot = telebot.TeleBot("1346425132:AAHZfTwGvYBBDoJpRaFNMzqnXmNSuWxH6hg")
 filename = "nums.json"
+
 
 def report(text):
     
@@ -27,7 +26,7 @@ def report(text):
         rep = {}
         file = open(filename, 'w')
         lst = []
-        w = str(water) + ' л.'
+        w = str(water)
         lst = [w, desc]
         rep[day] = lst
         file.close()
@@ -36,18 +35,7 @@ def report(text):
     json.dump(rep, filea)
     filea.close()
     
-    
-def out():
-    
-    rep = json.load(open(filename))
-    
-    for i in range(100):
-        for k, v in rep.items():
-            if i == int(k):
-                print("day " + str(i) + ": ")
-                print(rep.get(str(k)))
-           
-        
+       
 @bot.message_handler(commands=['start'])
 def handle_start(message):
         user_markup = telebot.types.ReplyKeyboardMarkup(True, True)
@@ -61,7 +49,7 @@ def handle_text(message):
         
         try:
             rep = json.load(open(filename))
-            for i in range(100):
+            for i in range(150):
                 for k, v in rep.items():
                     if i == int(k):
                         bot.send_message(message.chat.id, "ДЕНЬ " + str(i) + ":\n" + "полив: " + rep.get(str(k))[0] + " л.\n" + rep.get(str(k))[1])
