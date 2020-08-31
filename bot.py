@@ -35,6 +35,10 @@ def report(text):
     filea.close()
     
     
+def go(text):
+    s = str(text) + " lol"
+    
+    
 def out():
     
     rep = json.load(open(filename))
@@ -56,7 +60,7 @@ def handle_start(message):
 @bot.message_handler(content_types=['text'])
 def handle_text(message):
         try:
-                report(message.text)
+                go(message.text)
                 
                 bot.send_message(message.chat.id, "Данные добавлены.")   
             
