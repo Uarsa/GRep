@@ -48,12 +48,14 @@ def delete():
     try:
         last_day = max(day_list)
         del rep[last_day]
-        return "Последняя запись удалена."
+        
         file.close()
     
         filea = open(filename, 'w')
         json.dump(rep, filea)
-        filea.close()  
+        filea.close()
+        
+        return "Последняя запись удалена."
         
     except ValueError:
         return "Записи отсутствуют."
