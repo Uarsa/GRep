@@ -60,9 +60,7 @@ def delete():
     except ValueError:
         return "Записи отсутствуют."
     
-      
-    
-    
+          
 @bot.message_handler(commands=['start'])
 def handle_start(message):
         user_markup = telebot.types.ReplyKeyboardMarkup(True, True)
@@ -72,6 +70,7 @@ def handle_start(message):
         
 @bot.message_handler(content_types=['text'])
 def handle_text(message):
+    
     if message.text == "/show":
         
         try:
