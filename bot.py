@@ -45,8 +45,14 @@ def delete():
     for k in rep.keys():
         day_list.append(k)
     
-    last_day = max(day_list)
-    del rep[last_day]
+    try:
+        last_day = max(day_list)
+        del rep[last_day]
+        return "Последняя запись удалена."
+        
+    except ValueError:
+        return "Записи отсутствуют."
+    
     file.close()
     
     filea = open(filename, 'w')
@@ -79,11 +85,8 @@ def handle_text(message):
             
     elif message.text == "/delete":
         
-        try:
-            delete()
-            bot.send_message(message.chat.id, "Последняя запись удалена.")
-        except:
-            bot.send_message(message.chat.id, "Записи отсутствуют.")
+        bot.send_message(message.chat.id, delete())
+  
                
     else:    
         try:
