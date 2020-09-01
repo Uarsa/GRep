@@ -35,11 +35,34 @@ def report(text):
     json.dump(rep, filea)
     filea.close()
     
-       
+    
+def delete():
+    
+    file = open(filename)
+    rep = json.load(file)
+    
+    day_list = []
+    for k in rep.keys():
+        day_list.append(k)
+    
+    try:
+        last_day = max(day_list)
+        del rep[last_day]
+        
+    except ValueError:
+        bot.send_message(message.chat.id, "Записи отсутствуют.")
+    
+    file.close()
+    
+    filea = open(filename, 'w')
+    json.dump(rep, filea)
+    filea.close()    
+    
+    
 @bot.message_handler(commands=['start'])
 def handle_start(message):
         user_markup = telebot.types.ReplyKeyboardMarkup(True, True)
-        user_markup.row("/start", "/show")
+        user_markup.row("/start", "/show", "/delete")
         bot.send_message(message.from_user.id, "Пришли данные в формате:\nдень; вода; описание.", reply_markup=user_markup)
         
         
@@ -56,6 +79,11 @@ def handle_text(message):
                         
         except FileNotFoundError:
             bot.send_message(message.chat.id, "Записи отсутствуют.")
+            
+    elif message.text == "/delete":
+        
+        delete()
+        
             
     else:    
         try:
