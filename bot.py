@@ -80,6 +80,10 @@ def handle_text(message):
                 for k, v in rep.items():
                     if i == int(k):
                         bot.send_message(message.chat.id, "ДЕНЬ " + str(i) + ":\n" + "полив: " + rep.get(str(k))[0] + " л.\n" + "описание: " + rep.get(str(k))[1] + ".")
+                        return
+                    else:
+                        bot.send_message(message.chat.id, "Записи отсутствуют.")
+                        return
          
                           
         except FileNotFoundError:
