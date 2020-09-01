@@ -49,15 +49,16 @@ def delete():
         last_day = max(day_list)
         del rep[last_day]
         return "Последняя запись удалена."
+        file.close()
+    
+        filea = open(filename, 'w')
+        json.dump(rep, filea)
+        filea.close()  
         
     except ValueError:
         return "Записи отсутствуют."
     
-    file.close()
-    
-    filea = open(filename, 'w')
-    json.dump(rep, filea)
-    filea.close()    
+      
     
     
 @bot.message_handler(commands=['start'])
